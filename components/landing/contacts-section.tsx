@@ -44,8 +44,18 @@ export function ContactsSection() {
             </div>
 
             <div className="rounded-2xl border border-white/15 bg-white/5 p-4">
-              <dt className="text-xs uppercase tracking-[0.18em] text-slate-300">Рабочие часы</dt>
-              <dd className="mt-2 text-base text-white">{contacts.workingHours}</dd>
+              <dt className="text-xs uppercase tracking-[0.18em] text-slate-300">VK</dt>
+              <dd className="mt-2">
+                <TrackedLink
+                  href={contacts.vkHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  goal={metricGoals.vkClick}
+                  className="text-lg font-semibold text-white underline decoration-cyan-200 underline-offset-4"
+                >
+                  {contacts.vkDisplay}
+                </TrackedLink>
+              </dd>
             </div>
           </dl>
         </article>

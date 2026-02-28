@@ -6,11 +6,6 @@ export function ReviewsSection() {
       <div className="mx-auto max-w-6xl">
         <p className="section-tag">Отзывы</p>
         <h2 className="section-title">Публичные отзывы на независимых площадках</h2>
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-          Источники с отзывами открыты и доступны по ссылкам. Скриншоты можно
-          добавить в этот блок перед production-запуском.
-        </p>
-
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {reviewSources.map((source) => (
             <article
