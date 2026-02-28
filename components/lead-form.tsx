@@ -67,6 +67,12 @@ export function LeadForm({ source }: { source: string }) {
       idempotencyKey,
     };
 
+    const timeoutMs = 12_000;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => {
+      controller.abort();
+    }, timeoutMs);
+
     try {
       const response = await fetch("/api/leads", {
         method: "POST",
@@ -74,6 +80,7 @@ export function LeadForm({ source }: { source: string }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       });
 
       const responseData = (await response.json().catch(() => null)) as
@@ -103,11 +110,22 @@ export function LeadForm({ source }: { source: string }) {
 
       formElement.reset();
       setIdempotencyKey(generateIdempotencyKey());
-    } catch {
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        setStatus({
+          type: "error",
+          message: "Сервер долго отвечает. Попробуйте отправить заявку ещё раз.",
+        });
+
+        return;
+      }
+
       setStatus({
         type: "error",
         message: "Ошибка соединения. Попробуйте позже или напишите в Telegram.",
       });
+    } finally {
+      clearTimeout(timeout);
     }
   }
 

@@ -1,4 +1,4 @@
-export type MetricGoal = "form_submit" | "contact_click" | "telegram_click";
+export type MetricGoal = "form_submit" | "contact_click" | "telegram_click" | "vk_click";
 
 declare global {
   interface Window {

@@ -26,7 +26,7 @@ export const teacherProfile = {
   offer: "Качественная подготовка к ЕГЭ и ОГЭ",
   yearResults: "Результаты ЕГЭ 2025: 100, 95, 90, 88",
   intro:
-    "Готовлю к успешной сдаче ОГЭ и ЕГЭ, к олимпиадам, помогаю закрыть пробелы школьной программы и поддерживаю студентов: поступление, домашние задания, непонятные темы и вступительные испытания.",
+    "Если химия «не складывается» или нужен высокий результат — разложим всё по полочкам. Готовлю к ОГЭ и ЕГЭ, готовлю к поступлению в университет и олимпиадам, помогаю закрыть пробелы и начать понимать предмет. Помогаю студентам: домашние задания, контрольные работы, непонятные темы, подготовка к вступительным и вопросы по поступлению.",
   support: "Связь с учеником 24/7 и регулярная обратная связь с родителями.",
 };
 
@@ -98,31 +98,20 @@ export const reviewSources = [
     link: "https://profi.ru/profile/ZhigirovaNV4/?srsltid=AfmBOoqTM4Xui58Zrm65Y38P-uwvY7-9Tw3-ye7-0JTf9kJOLv4GuT81",
   },
   {
-    title: "Avito: профиль бренда",
-    description:
-      "Отзывы и активные предложения по занятиям.",
-    link: "https://www.avito.ru/brands/52adddcfc6904d65af1fc7a0faec3dd9?src=sharing",
-  },
-  {
     title: "Avito: карточка услуги",
     description:
       "Подробное описание подхода и подготовки на высокие баллы.",
     link: "https://www.avito.ru/novosibirsk/predlozheniya_uslug/repetitor_po_himii_na_vysokie_bally_ege_oge_2546982755?utm_campaign=native&utm_medium=item_page_ios&utm_source=soc_sharing",
   },
-  {
-    title: "Instagram",
-    description:
-      "Публичный профиль с контентом и дополнительными подтверждениями экспертности.",
-    link: "https://www.instagram.com/zhigirovan?igsh=aGM1NWsydmJxd2Vk",
-  },
 ] as const;
 
 export const contacts = {
-  phoneDisplay: "TODO: +7 (___) ___-__-__",
-  phoneHref: "tel:+70000000000",
-  telegramDisplay: "TODO: @replace_before_release",
-  telegramHref: "https://t.me/replace_before_release",
-  workingHours: "TODO: укажите часы для связи",
+  phoneDisplay: "+7 (991) 382-76-26",
+  phoneHref: "tel:+79913827626",
+  telegramDisplay: "@Zhigirovan",
+  telegramHref: "https://t.me/Zhigirovan",
+  vkDisplay: "@zhigirova",
+  vkHref: "https://vk.com/zhigirova",
   city: "Онлайн по всей России",
 };
 
@@ -150,4 +139,5 @@ export const metricGoals = {
   formSubmit: "form_submit",
   contactClick: "contact_click",
   telegramClick: "telegram_click",
+  vkClick: "vk_click",
 } as const;

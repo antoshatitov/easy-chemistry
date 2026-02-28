@@ -1,5 +1,10 @@
-import { contacts, metricGoals, teacherProfile } from "@/content/site-content";
-import { TrackedLink } from "@/components/analytics/tracked-link";
+import Image from "next/image";
+
+import { HeroBackgroundVideo } from "@/components/landing/hero-background-video";
+import { teacherProfile } from "@/content/site-content";
+
+const teacherPhotoBlurDataUrl =
+  "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAgABgDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAQFAwb/xAAkEAACAgICAgAHAAAAAAAAAAABAgADBBEhMQUSEyIjJEFRcf/EABYBAQEBAAAAAAAAAAAAAAAAAAECA//EABgRAQEBAQEAAAAAAAAAAAAAAAEAEUEC/9oADAMBAAIRAxEAPwDmcnGNVxCD5fxN3rK4aMK9E9nUbspa11Uck8alJMVzimqxNpvQMzayha+zUn9wm+XUaq/h+pGj1qESGseMprRHvbRtUaVSY1iZIs+j2/ZkGm1Xyi1hOyONGN4zLjubCC2hyQZU7g1e5RpvYJs9EwkuzyeHZWfYsP7CDvI8h2//2Q==";
 
 export function HeroSection() {
   return (
@@ -7,19 +12,12 @@ export function HeroSection() {
       id="home"
       className="relative isolate overflow-hidden px-4 pb-12 pt-28 md:px-8 md:pb-16 md:pt-36"
     >
-      <video
-        className="absolute inset-0 -z-20 h-full w-full object-cover"
-        src="/hero-background.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
+      <HeroBackgroundVideo />
       <div className="absolute inset-0 -z-10 bg-slate-950/72" />
       <div className="absolute -left-24 top-12 -z-10 h-52 w-52 rounded-full bg-amber-300/35 blur-3xl md:h-72 md:w-72" />
       <div className="absolute bottom-0 right-0 -z-10 h-56 w-56 translate-x-1/4 rounded-full bg-cyan-300/35 blur-3xl md:h-72 md:w-72" />
 
-      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-end">
+      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-center">
         <div className="space-y-6 animate-enter">
           <p className="inline-flex rounded-full border border-white/25 px-4 py-2 text-xs uppercase tracking-[0.2em] text-amber-100">
             {teacherProfile.classes}
@@ -33,10 +31,6 @@ export function HeroSection() {
           <p className="max-w-2xl text-xl font-semibold text-amber-200 md:text-2xl">
             {teacherProfile.tagline}
           </p>
-          <p className="max-w-xl rounded-2xl border border-white/25 bg-white/10 px-4 py-3 text-base text-slate-100 backdrop-blur">
-            {teacherProfile.yearResults}
-          </p>
-
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
               href="#contacts"
@@ -53,23 +47,25 @@ export function HeroSection() {
           </div>
         </div>
 
-        <aside className="rounded-3xl border border-white/25 bg-white/10 p-5 text-slate-100 shadow-2xl backdrop-blur-xl md:p-6 animate-enter-delayed">
-          <p className="text-sm uppercase tracking-[0.2em] text-amber-100">Быстрый контакт</p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">Написать сейчас</h2>
-          <p className="mt-3 text-base text-slate-200">
-            Нужна консультация по подготовке или разбор программы? Напишите в
-            Telegram и я помогу выстроить индивидуальный маршрут.
-          </p>
-          <TrackedLink
-            href={contacts.telegramHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            goal={metricGoals.telegramClick}
-            className="mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-2xl border border-cyan-200/60 bg-cyan-300/90 px-4 py-2 text-base font-semibold text-slate-900 transition hover:bg-cyan-200"
-          >
-            Написать в Telegram
-          </TrackedLink>
-          <p className="mt-3 text-sm text-slate-300">{contacts.telegramDisplay}</p>
+        <aside className="animate-enter-delayed mx-auto w-full max-w-sm lg:mx-0 lg:justify-self-end">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/25 bg-slate-900/30 shadow-2xl backdrop-blur-sm">
+            <div className="relative aspect-[3/4] w-full">
+              <Image
+                src="/images/teacher/teacher-photo-960.webp"
+                alt={`Преподаватель химии ${teacherProfile.fullName}`}
+                fill
+                priority
+                placeholder="blur"
+                blurDataURL={teacherPhotoBlurDataUrl}
+                sizes="(max-width: 640px) 82vw, (max-width: 1024px) 55vw, 420px"
+                className="object-cover object-center"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/45 via-transparent to-slate-950/10" />
+            </div>
+            <p className="absolute bottom-4 left-4 rounded-full border border-white/40 bg-slate-950/55 px-3 py-1 text-xs uppercase tracking-[0.14em] text-amber-100 backdrop-blur">
+              Преподаватель
+            </p>
+          </div>
         </aside>
       </div>
     </section>

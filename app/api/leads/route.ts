@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 
 import { leadSchema } from "@/lib/lead-schema";
-import { checkRateLimit, markIdempotencyKey } from "@/lib/rate-limit";
+import {
+  checkRateLimit,
+  markIdempotencyKey,
+  releaseIdempotencyKey,
+} from "@/lib/rate-limit";
 import { sendLeadToTelegram } from "@/lib/telegram";
 
 function getClientKey(request: Request) {
@@ -94,6 +98,8 @@ export async function POST(request: Request) {
     const errorMessage =
       error instanceof Error ? error.message : "Не удалось отправить заявку";
 
+    releaseIdempotencyKey(payload.idempotencyKey);
+
     if (errorMessage.includes("TELEGRAM_CONFIG_MISSING")) {
       return NextResponse.json(
         {
@@ -102,6 +108,17 @@ export async function POST(request: Request) {
           message: "Сервис временно недоступен. Напишите в Telegram напрямую.",
         },
         { status: 503 },
+      );
+    }
+
+    if (errorMessage.includes("TELEGRAM_TIMEOUT")) {
+      return NextResponse.json(
+        {
+          ok: false,
+          code: "TELEGRAM_TIMEOUT",
+          message: "Сервис временно не отвечает. Попробуйте позже.",
+        },
+        { status: 504 },
       );
     }
 

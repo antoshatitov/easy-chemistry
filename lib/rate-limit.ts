@@ -73,3 +73,7 @@ export function markIdempotencyKey(
 
   return false;
 }
+
+export function releaseIdempotencyKey(idempotencyKey: string) {
+  idempotencyKeys.delete(idempotencyKey);
+}

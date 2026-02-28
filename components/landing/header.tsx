@@ -6,7 +6,7 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-2xl border border-white/25 bg-slate-950/55 px-4 py-3 backdrop-blur-xl md:px-6">
         <a
           href="#home"
-          className="min-h-11 min-w-11 rounded-full border border-white/25 px-4 py-2 text-sm font-semibold uppercase tracking-[0.14em] text-amber-200 transition hover:border-amber-200"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/25 px-4 py-2 text-center text-sm font-semibold uppercase tracking-[0.14em] text-amber-200 transition hover:border-amber-200"
         >
           Easy Chemistry
         </a>
