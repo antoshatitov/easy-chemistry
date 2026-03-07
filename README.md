@@ -58,6 +58,13 @@ docker compose build
 docker compose up -d
 ```
 
+Контейнер слушает только `127.0.0.1:3001`, поэтому для production нужен reverse proxy с HTTPS.
+
+Подробный runbook:
+
+- `docs/deployment/vps.md`
+- `docs/deployment/nginx.easychemistry.ru.conf`
+
 ## TODO перед production
 
 - Заполнить реальные контакты (телефон, `@telegram`, рабочие часы).

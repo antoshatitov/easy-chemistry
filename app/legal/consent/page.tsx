@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 
+import { LegalReleaseBlockerNotice } from "@/components/legal/legal-release-blocker-notice";
+import { legalProfile } from "@/content/legal-content";
+
 export const metadata: Metadata = {
   title: "Согласие на обработку персональных данных",
 };
@@ -47,13 +50,17 @@ export default function ConsentPage() {
         <h2 className="text-xl font-semibold text-white">4. Отзыв согласия</h2>
         <p>
           Для отзыва согласия пользователь направляет запрос по контактам
-          оператора: <strong>TODO: добавить email/контакт для запросов</strong>.
+          оператора:
+          {" "}
+          <strong>
+            {legalProfile.consentWithdrawalContact ||
+              "Контакт для отзыва согласия будет добавлен перед публичным запуском сайта."}
+          </strong>
+          .
         </p>
       </section>
 
-      <p className="rounded-xl border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-sm text-amber-100">
-        TODO перед релизом: добавить реквизиты и контакт для отзыва согласия.
-      </p>
+      <LegalReleaseBlockerNotice />
     </>
   );
 }

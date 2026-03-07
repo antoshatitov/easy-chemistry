@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 
+import { LegalReleaseBlockerNotice } from "@/components/legal/legal-release-blocker-notice";
+import { legalProfile } from "@/content/legal-content";
+
 export const metadata: Metadata = {
   title: "Пользовательское соглашение",
 };
@@ -46,10 +49,19 @@ export default function TermsPage() {
         </p>
       </section>
 
-      <p className="rounded-xl border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-sm text-amber-100">
-        TODO перед релизом: дополнить условиями оплаты/возврата после
-        согласования юридического статуса.
-      </p>
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-white">5. Оплата и возврат</h2>
+        <p>
+          {legalProfile.paymentTerms ||
+            "Условия оплаты будут опубликованы перед публичным запуском сайта."}
+        </p>
+        <p>
+          {legalProfile.refundTerms ||
+            "Условия возврата и переноса занятий будут опубликованы перед публичным запуском сайта."}
+        </p>
+      </section>
+
+      <LegalReleaseBlockerNotice />
     </>
   );
 }

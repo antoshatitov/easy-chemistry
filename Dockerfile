@@ -5,6 +5,10 @@ RUN npm ci
 
 FROM node:22-alpine AS builder
 WORKDIR /app
+ARG NEXT_PUBLIC_SITE_URL=https://easy-chemistry.ru
+ARG NEXT_PUBLIC_YANDEX_METRIKA_ID
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_YANDEX_METRIKA_ID=$NEXT_PUBLIC_YANDEX_METRIKA_ID
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
@@ -12,6 +16,7 @@ RUN npm run build
 FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
 ENV PORT=3000
 
 COPY --from=builder /app/public ./public
