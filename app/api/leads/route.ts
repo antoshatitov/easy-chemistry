@@ -98,6 +98,15 @@ export async function POST(request: Request) {
     const errorMessage =
       error instanceof Error ? error.message : "Не удалось отправить заявку";
 
+    console.error("Lead delivery failed", {
+      error: errorMessage,
+      source: payload.source,
+      requestType: payload.requestType,
+      goal: payload.goal,
+      format: payload.format,
+      idempotencyKey: payload.idempotencyKey,
+    });
+
     releaseIdempotencyKey(payload.idempotencyKey);
 
     if (errorMessage.includes("TELEGRAM_CONFIG_MISSING")) {

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 
+import { LegalReleaseBlockerNotice } from "@/components/legal/legal-release-blocker-notice";
+import { getOperatorDescription, legalProfile } from "@/content/legal-content";
+
 export const metadata: Metadata = {
   title: "Политика конфиденциальности",
 };
@@ -16,10 +19,27 @@ export default function PrivacyPage() {
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-white">1. Оператор персональных данных</h2>
         <p>
-          ФИО: <strong>TODO: указать юридический статус и ФИО оператора</strong>.
+          Оператор: <strong>{getOperatorDescription()}</strong>.
         </p>
         <p>
-          Контакты: <strong>TODO: email и телефон оператора</strong>.
+          Контакты:
+          {" "}
+          <a className="underline decoration-amber-300 underline-offset-4" href={legalProfile.operatorPhoneHref}>
+            {legalProfile.operatorPhoneDisplay}
+          </a>
+          {legalProfile.operatorEmail
+            ? (
+              <>
+                <span>, </span>
+                <a
+                  className="underline decoration-amber-300 underline-offset-4"
+                  href={`mailto:${legalProfile.operatorEmail}`}
+                >
+                  {legalProfile.operatorEmail}
+                </a>
+              </>
+            )
+            : ". Email для правовых запросов будет добавлен перед публичным запуском сайта."}
         </p>
       </section>
 
@@ -75,9 +95,7 @@ export default function PrivacyPage() {
         </ul>
       </section>
 
-      <p className="rounded-xl border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-sm text-amber-100">
-        TODO перед релизом: заполнить юридические реквизиты и контакт оператора.
-      </p>
+      <LegalReleaseBlockerNotice />
     </>
   );
 }
