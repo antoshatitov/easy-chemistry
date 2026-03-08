@@ -1,5 +1,5 @@
 export function getSiteUrl() {
-  const fallbackUrl = "https://easy-chemistry.ru";
+  const fallbackUrl = "https://easychemistry.ru";
   const rawValue = process.env.NEXT_PUBLIC_SITE_URL || fallbackUrl;
 
   try {
