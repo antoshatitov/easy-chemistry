@@ -2,11 +2,11 @@ import { navigationItems } from "@/content/site-content";
 
 export function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-2xl border border-white/25 bg-slate-950/55 px-4 py-3 backdrop-blur-xl md:px-6">
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-8 md:pt-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 rounded-[1.75rem] border border-white/25 bg-slate-950/55 px-3 py-3 backdrop-blur-xl sm:gap-3 sm:px-4 md:gap-4 md:px-6">
         <a
           href="#home"
-          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/25 px-4 py-2 text-center text-sm font-semibold uppercase tracking-[0.14em] text-amber-200 transition hover:border-amber-200"
+          className="inline-flex min-h-11 min-w-0 shrink items-center justify-center whitespace-nowrap rounded-full border border-white/25 px-3 py-2 text-center text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-amber-200 transition hover:border-amber-200 sm:px-4 sm:text-sm sm:tracking-[0.14em]"
         >
           Easy Chemistry
         </a>
@@ -28,9 +28,11 @@ export function Header() {
 
         <a
           href="#contacts"
-          className="inline-flex min-h-11 items-center justify-center rounded-full border border-amber-300/60 bg-amber-300 px-5 py-2 text-sm font-semibold text-slate-900 transition hover:bg-amber-200"
+          aria-label="Оставить заявку"
+          className="inline-flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-amber-300/60 bg-amber-300 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-amber-200 sm:px-5"
         >
-          Оставить заявку
+          <span className="md:hidden">Заявка</span>
+          <span className="hidden md:inline">Оставить заявку</span>
         </a>
       </div>
     </header>

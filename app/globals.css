@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -83,10 +84,11 @@ textarea:focus-visible {
 
 .section-title {
   margin-top: 1rem;
-  max-width: 32ch;
-  font-size: clamp(1.9rem, 4.7vw, 3.15rem);
-  line-height: 1.15;
+  max-width: 30ch;
+  font-size: clamp(1.8rem, 7vw, 3.15rem);
+  line-height: 1.1;
   color: #f8fafc;
+  text-wrap: balance;
 }
 
 .animate-enter {
@@ -105,6 +107,18 @@ textarea:focus-visible {
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 767px) {
+  main section[id] {
+    scroll-margin-top: 7.5rem;
+  }
+
+  .section-tag {
+    min-height: 2.5rem;
+    padding: 0.45rem 0.9rem;
+    letter-spacing: 0.18em;
   }
 }
 

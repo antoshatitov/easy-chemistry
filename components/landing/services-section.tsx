@@ -11,7 +11,7 @@ export function ServicesSection() {
           {services.map((service) => (
             <article
               key={service.id}
-              className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/[0.03] p-6"
+              className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/[0.03] p-5 md:p-6"
             >
               <div className="absolute -left-14 -top-14 h-36 w-36 rounded-full bg-cyan-300/10 blur-3xl" />
               <h3 className="relative text-2xl font-semibold text-white">{service.title}</h3>
@@ -26,7 +26,7 @@ export function ServicesSection() {
               </p>
               <a
                 href="#contacts"
-                className="relative mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-white/30 bg-slate-900 px-5 py-2 text-sm font-semibold text-white transition hover:border-amber-200"
+                className="relative mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-white/30 bg-slate-900 px-5 py-2 text-sm font-semibold text-white transition hover:border-amber-200 sm:min-h-11 sm:w-auto"
               >
                 Оставить заявку
               </a>

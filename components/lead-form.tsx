@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
 
 import {
   leadGoalOptions,
@@ -29,18 +29,19 @@ export function LeadForm({ source }: { source: string }) {
   const [idempotencyKey, setIdempotencyKey] = useState(generateIdempotencyKey);
 
   const isPending = status.type === "loading";
-
-  const statusClassName = useMemo(() => {
-    if (status.type === "success") {
-      return "border-emerald-400/50 bg-emerald-500/15 text-emerald-100";
-    }
-
-    if (status.type === "error") {
-      return "border-rose-400/50 bg-rose-500/15 text-rose-100";
-    }
-
-    return "";
-  }, [status]);
+  const statusId = `${source}-form-status`;
+  const statusMessage =
+    status.type === "loading"
+      ? "Отправляем заявку..."
+      : status.type === "success" || status.type === "error"
+        ? status.message
+        : "";
+  const statusClassName =
+    status.type === "success"
+      ? "border-emerald-400/50 bg-emerald-500/15 text-emerald-100"
+      : status.type === "error"
+        ? "border-rose-400/50 bg-rose-500/15 text-rose-100"
+        : "border-amber-300/40 bg-amber-300/10 text-amber-50";
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -134,6 +135,7 @@ export function LeadForm({ source }: { source: string }) {
       className="rounded-3xl border border-white/20 bg-white/10 p-5 backdrop-blur md:p-6"
       onSubmit={handleSubmit}
       noValidate
+      aria-busy={isPending}
     >
       <div className="grid gap-4 md:grid-cols-2">
         <label className="grid gap-1.5 text-sm text-slate-100 md:col-span-2">
@@ -252,22 +254,28 @@ export function LeadForm({ source }: { source: string }) {
 
       <input type="hidden" name="idempotencyKey" value={idempotencyKey} readOnly />
 
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex min-h-11 items-center justify-center rounded-full border border-amber-300/70 bg-amber-300 px-6 py-2.5 text-base font-semibold text-slate-900 transition hover:bg-amber-200 disabled:cursor-not-allowed disabled:opacity-60"
+          aria-describedby={status.type === "idle" ? `${source}-form-note` : statusId}
+          className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-amber-300/70 bg-amber-300 px-6 py-2.5 text-base font-semibold text-slate-900 transition hover:bg-amber-200 disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-11 sm:w-auto"
         >
           {isPending ? "Отправляем..." : "Отправить заявку"}
         </button>
-        <p className="text-xs text-slate-300">
+        <p id={`${source}-form-note`} className="max-w-md text-sm leading-relaxed text-slate-300 sm:text-xs">
           Нажимая кнопку, вы отправляете заявку в Telegram-чат.
         </p>
       </div>
 
-      {(status.type === "success" || status.type === "error") && (
-        <p className={`mt-4 rounded-xl border px-4 py-3 text-sm ${statusClassName}`}>
-          {status.message}
+      {status.type !== "idle" && (
+        <p
+          id={statusId}
+          role={status.type === "error" ? "alert" : "status"}
+          aria-live={status.type === "error" ? "assertive" : "polite"}
+          className={`mt-4 rounded-2xl border px-4 py-3 text-sm leading-relaxed ${statusClassName}`}
+        >
+          {statusMessage}
         </p>
       )}
     </form>
