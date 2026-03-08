@@ -10,7 +10,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative isolate overflow-hidden px-4 pb-12 pt-28 md:px-8 md:pb-16 md:pt-36"
+      className="relative isolate overflow-hidden px-4 pb-12 pt-32 md:px-8 md:pb-16 md:pt-36"
     >
       <HeroBackgroundVideo />
       <div className="absolute inset-0 -z-10 bg-slate-950/72" />
@@ -22,25 +22,25 @@ export function HeroSection() {
           <p className="inline-flex rounded-full border border-white/25 px-4 py-2 text-xs uppercase tracking-[0.2em] text-amber-100">
             {teacherProfile.classes}
           </p>
-          <h1 className="max-w-3xl text-balance text-4xl font-semibold leading-[1.06] text-white md:text-6xl">
+          <h1 className="max-w-3xl text-balance text-[clamp(2.65rem,11vw,4.6rem)] font-semibold leading-[1.02] text-white md:leading-[1.06]">
             {teacherProfile.fullName}
           </h1>
-          <p className="max-w-2xl text-lg text-slate-100 md:text-xl">
+          <p className="max-w-2xl text-base text-slate-100 sm:text-lg md:text-xl">
             {teacherProfile.offer}
           </p>
-          <p className="max-w-2xl text-xl font-semibold text-amber-200 md:text-2xl">
+          <p className="max-w-2xl text-lg font-semibold text-amber-200 sm:text-xl md:text-2xl">
             {teacherProfile.tagline}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
               href="#contacts"
-              className="inline-flex min-h-11 items-center justify-center rounded-full bg-amber-300 px-6 py-3 text-base font-semibold text-slate-900 transition hover:bg-amber-200"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-amber-300 px-6 py-3 text-base font-semibold text-slate-900 transition hover:bg-amber-200 sm:min-h-11 sm:w-auto"
             >
               Записаться на занятие
             </a>
             <a
               href="#contacts"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/35 bg-slate-900/45 px-6 py-3 text-base font-semibold text-white transition hover:border-white"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-white/35 bg-slate-900/45 px-6 py-3 text-base font-semibold text-white transition hover:border-white sm:min-h-11 sm:w-auto"
             >
               Записаться на консультацию
             </a>
