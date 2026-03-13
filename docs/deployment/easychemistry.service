@@ -1,0 +1,20 @@
+[Unit]
+Description=Easy Chemistry Next.js standalone app
+After=network.target
+
+[Service]
+Type=simple
+User=anton
+WorkingDirectory=/home/anton/easy-chemistry/.next/standalone
+Environment=NODE_ENV=production
+Environment=HOSTNAME=127.0.0.1
+Environment=PORT=3001
+EnvironmentFile=/home/anton/easy-chemistry/.env
+# Safety net: keep public/ and .next/static in sync with the standalone server before each restart.
+ExecStartPre=/bin/sh -lc 'cd /home/anton/easy-chemistry && /usr/bin/node scripts/prepare-standalone.mjs'
+ExecStart=/usr/bin/node /home/anton/easy-chemistry/.next/standalone/server.js
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

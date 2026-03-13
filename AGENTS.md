@@ -95,3 +95,12 @@ PR-описание должно включать все секции:
 - Решение о merge принимает только пользователь.
 
 ---
+
+## 2) Локальные команды проекта
+
+- `npm run dev` — локальная разработка на Next.js dev server
+- `npm run build` — production build Next.js
+- `npm run build:standalone` — production build + упаковка `.next/static` и `public` в `.next/standalone` для `systemd`-деплоя
+- `npm run start` — запуск Next.js production server без standalone-упаковки
+- `npm run lint` — запуск ESLint
+- `npm run typecheck` — проверка TypeScript без emit
