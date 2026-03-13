@@ -73,6 +73,7 @@ sudo systemctl status easychemistry.service --no-pager
 
 Возьмите шаблон из `docs/deployment/easychemistry.service` и установите его как `/etc/systemd/system/easychemistry.service`.
 Критичная строка в юните - `ExecStartPre`: она синхронизирует `public` и `.next/static` перед каждым рестартом сервиса и не дает снова получить "голый" HTML после обычного `next build`.
+В шаблоне есть fallback для rollback на более старые стабильные коммиты, где еще нет `scripts/prepare-standalone.mjs` или команды `npm run build:standalone`.
 
 Пример юнита:
 
@@ -89,7 +90,7 @@ Environment=NODE_ENV=production
 Environment=HOSTNAME=127.0.0.1
 Environment=PORT=3001
 EnvironmentFile=/home/anton/easy-chemistry/.env
-ExecStartPre=/bin/sh -lc 'cd /home/anton/easy-chemistry && /usr/bin/node scripts/prepare-standalone.mjs'
+ExecStartPre=/bin/sh -lc 'cd /home/anton/easy-chemistry && if [ -f scripts/prepare-standalone.mjs ]; then /usr/bin/node scripts/prepare-standalone.mjs; else mkdir -p .next/standalone/.next && rm -rf .next/standalone/.next/static .next/standalone/public && cp -a .next/static .next/standalone/.next/ && cp -a public .next/standalone/; fi'
 ExecStart=/usr/bin/node /home/anton/easy-chemistry/.next/standalone/server.js
 Restart=always
 RestartSec=5
@@ -151,11 +152,12 @@ curl -I https://easychemistry.ru/images/teacher/teacher-photo-960.webp
 git log --oneline -n 5
 git checkout <previous-stable-commit>
 npm ci
-npm run build:standalone
+npm run build
 sudo systemctl restart easychemistry.service
 ```
 
 После отката повторите smoke test для `easychemistry.ru` и `odi-group.ru`.
+Даже для старых ревизий `easychemistry.service` сам досинхронизирует `.next/static` и `public` через fallback в `ExecStartPre`.
 
 ## 8. Быстрая диагностика "голого" HTML без стилей
 

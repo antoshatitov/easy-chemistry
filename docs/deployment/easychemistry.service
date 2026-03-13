@@ -10,8 +10,9 @@ Environment=NODE_ENV=production
 Environment=HOSTNAME=127.0.0.1
 Environment=PORT=3001
 EnvironmentFile=/home/anton/easy-chemistry/.env
-# Safety net: keep public/ and .next/static in sync with the standalone server before each restart.
-ExecStartPre=/bin/sh -lc 'cd /home/anton/easy-chemistry && /usr/bin/node scripts/prepare-standalone.mjs'
+# Safety net: sync public/ and .next/static before each restart, even on rolled-back revisions
+# that predate scripts/prepare-standalone.mjs or npm run build:standalone.
+ExecStartPre=/bin/sh -lc 'cd /home/anton/easy-chemistry && if [ -f scripts/prepare-standalone.mjs ]; then /usr/bin/node scripts/prepare-standalone.mjs; else mkdir -p .next/standalone/.next && rm -rf .next/standalone/.next/static .next/standalone/public && cp -a .next/static .next/standalone/.next/ && cp -a public .next/standalone/; fi'
 ExecStart=/usr/bin/node /home/anton/easy-chemistry/.next/standalone/server.js
 Restart=always
 RestartSec=5
