@@ -62,9 +62,6 @@ export function HeroSection() {
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/45 via-transparent to-slate-950/10" />
             </div>
-            <p className="absolute bottom-4 left-4 rounded-full border border-white/40 bg-slate-950/55 px-3 py-1 text-xs uppercase tracking-[0.14em] text-amber-100 backdrop-blur">
-              Преподаватель
-            </p>
           </div>
         </aside>
       </div>
